@@ -1,0 +1,25 @@
+<div class="container">
+  <h1 class="display-4 text-center"> Ajouter une tache a realiser. </h1>
+    <form class="col-6 p-2" #addTodoFrom="ngForm">
+      <div class="form-group">
+        <label for="">Nom de tache :</label>
+        <input type="text" class="form-control m-1" name="todoName" [(ngModel)] ="todo.todoName" required>
+      </div>
+      <div class="form-group">
+        <label for="">Description de la tache : </label>
+        <textarea class="form-control" rows="3" name="description" [(ngModel)] ="todo.description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="">URL de Image :</label>
+        <input type="text" class="form-control m-1" name="image" [(ngModel)] ="todo.image">
+      </div>
+      <div class="form-group">
+        <label for="">Etat de la tache :</label>
+        <select name="todoStatus" class="custom-select m-1" id="" [(ngModel)] ="todo.todoStatus"  required>
+          <option value="true"> En cours </option>
+          <option value="false"> Terminée </option>
+        </select>
+      </div>
+      <button [disabled]="!addTodoFrom.form.valid" type="button" (click)="onSubmit()" class="btn btn-success btn-md">A jouter</button>
+    </form>
+</div>

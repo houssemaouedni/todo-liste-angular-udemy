@@ -1,0 +1,14 @@
+<div class="container-fluid ">
+  <p *ngIf="!todo">{{error}}</p>
+  <h1>Details de la tache : {{todo.todoName}} </h1>
+
+  <div *ngIf="todo" class="card" style="width: 20rem; height: 10rem;">
+    <img class="card-img-top" [src]="todo.image" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{todo.todoName}}</h5>
+      <p>{{todo.description}}</p>
+    </div>
+    <button class="btn btn-success" routerLink="/todos">Retour</button>
+  </div>
+
+</div>
