@@ -13,14 +13,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 const ROUTES : Routes = [
   {path: 'home', component: HomeComponent},
-  {path: '', component: HomeComponent},
   {path: 'todos', component: TodoComponent},
   {path: 'not-Found', component: NotFoundComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'add-todo', component:   AddTodoComponent},
   {path: 'users', component:  UsersComponent },
+  {path: 'add-todo', component:   AddTodoComponent},
   {path: 'add-user', component:   AddUserComponent},
   {path: 'single-todo/:id', component: SingleTodoComponent},
+  {path: '', component: HomeComponent},
   {path: '**', pathMatch:'full', redirectTo: 'not-Found'},
 ]
 @NgModule({

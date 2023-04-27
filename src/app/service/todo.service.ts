@@ -1,24 +1,39 @@
+import { Todo } from "../models/todo.model";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { Todo } from "../models/todo.model";
 
 
 @Injectable()
 
 export class TodoService{
   today = new Date();
-  todos: Todo[] | any;
+  todos: Todo[];
   todoSubject = new Subject<any[]>();
-
+  
   constructor( private httpClient : HttpClient){
+    this.todos = []
     setTimeout(() => {
+
+      this.todos = [
+        {
+          todoName : "Lorem Ipsum",
+          todoStatus: true,
+          image: "https://picsum.photos/id/0/200/300",
+          isModif : false,
+          description : "pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente ."
+
+        },
+
+      ]
       this.getTodoFromServer();
     }, 1000);
   }
   emitTodos(){
-    this.todoSubject.next(this.todos)
+     this.todoSubject.next(this.todos);
+    // this.saveTodoFromServer();
   }
+
   onChangeStatus(i: number){
     this.todos[i].todoStatus = !this.todos[i].todoStatus
     this.emitTodos();
@@ -38,14 +53,17 @@ export class TodoService{
       return false;
     }
   }
-  addTodo(todo: Todo): void{
-    this.todos.unshift(todo);
+  
+  addTodo(todo: Todo){
+    this.todos.push(todo) ;
+    console.log(this.todos);
     this.emitTodos();
     this.saveTodoFromServer();
+    // this.todos.splice(0)
 
   }
   saveTodoFromServer(): void{
-    this.httpClient.put("https://todo-list-app-24bce-default-rtdb.firebaseio.com/todos.json",this.todos)
+    this.httpClient.put("https://todo-list-app-24bce-default-rtdb.firebaseio.com/todo.json",this.todos)
     .subscribe(
       ()=>{
         console.log("donner enregistre avec success");
@@ -58,7 +76,7 @@ export class TodoService{
     );
   }
   getTodoFromServer(): void{
-    this.httpClient.get<Todo[]>("https://todo-list-app-24bce-default-rtdb.firebaseio.com/todos.json")
+    this.httpClient.get<Todo[]>("https://todo-list-app-24bce-default-rtdb.firebaseio.com/todo.json")
     .subscribe(
       (todoRecupe : Todo[])=>{
         this.todos = todoRecupe;

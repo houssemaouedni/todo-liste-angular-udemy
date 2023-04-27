@@ -3,19 +3,17 @@
   <ul class="list-group">
     <li class="list-group-item " *ngFor="let todo of todos, let i = index">
       <div [ngClass]="{encours: todo.todoStatus, terminer: !todo.todoStatus }">
-
+        
         <a [href]="todo.image">
           <img [src]="todo.image"/>
         </a>
         {{todo.todoName | uppercase}}
         <button type="button" class="btn btn-primary m-1" [disabled]="todo.todoStatus" (click)="onChangeStatus(i)" >en cour</button>
         <button type="button" class="btn btn-success m-1" [disabled]="!todo.todoStatus" (click)="onChangeStatus(i)">Terminer</button>
-
         <!-- Action de modification -->
         <button type="button" *ngIf="!todo.isModif" class="btn btn-danger m-1" (click)="onChangeIsModif(i)" >Modifier</button>
         <button type="button" *ngIf="todo.isModif" class="btn btn-success m-1" (click)="onChangeIsModif(i)">Modification terminée</button>
         <button type="button" class="btn btn-success m-1" (click)="onView(i)">En savoir plus</button>
-
         <input *ngIf="todo.isModif" type="text" class="form-control" [(ngModel)]="todo.todoName">
       </div>
     </li>

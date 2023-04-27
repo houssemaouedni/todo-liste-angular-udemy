@@ -11,13 +11,15 @@ import { TodoService } from 'src/app/service/todo.service';
 export class AddTodoComponent implements OnInit {
 
   todo = new Todo();
-
+  
   constructor(private todoService: TodoService, private router : Router) { }
-
+  
   ngOnInit(): void {
   }
   onSubmit():void{
     this.todoService.addTodo(this.todo);
+    console.log(this.todo);
+    
     this.router.navigate(["todos"])
   }
 
